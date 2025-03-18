@@ -1,14 +1,12 @@
 from abc import ABC, abstractmethod
 from math import sqrt
 
-# Исключение для недостаточного баланса
 class InsufficientBalanceException(Exception):
     def __init__(self, required, available):
         self.required = required
         self.available = available
         super().__init__(f"Недостаточно средств. Требуется: {required}, доступно: {available}")
 
-# Исключение для недопустимого возраста
 class InvalidAgeException(Exception):
     def __init__(self, age, min_age, max_age):
         self.age = age
@@ -16,7 +14,6 @@ class InvalidAgeException(Exception):
         self.max_age = max_age
         super().__init__(f"Недопустимый возраст: {age}. Допустимый диапазон: {min_age}-{max_age}")
 
-# Абстрактный класс для товаров
 class Product(ABC):
     def __init__(self, name, price):
         self._name = name
@@ -34,7 +31,6 @@ class Product(ABC):
     def get_details(self):
         pass
 
-# Класс для книг
 class Book(Product):
     def __init__(self, name, price, author):
         super().__init__(name, price)
@@ -43,7 +39,6 @@ class Book(Product):
     def get_details(self):
         return f"Книга: {self.name}, Автор: {self._author}, Цена: {self.price}"
 
-# Класс для электроники
 class Electronic(Product):
     def __init__(self, name, price, brand):
         super().__init__(name, price)
@@ -52,7 +47,6 @@ class Electronic(Product):
     def get_details(self):
         return f"Электроника: {self.name}, Бренд: {self._brand}, Цена: {self.price}"
 
-# Класс для управления корзиной покупок
 class ShoppingCart:
     def __init__(self):
         self._items = []
@@ -73,7 +67,6 @@ class ShoppingCart:
     def get_items(self):
         return self._items
 
-# Класс для управления историей покупок
 class PurchaseHistory:
     def __init__(self):
         self._purchases = []
@@ -84,7 +77,6 @@ class PurchaseHistory:
     def get_purchases(self):
         return self._purchases
 
-# Класс для управления счетом пользователя
 class Account:
     def __init__(self, balance=0):
         self._balance = balance
@@ -106,7 +98,6 @@ class Account:
     def balance(self):
         return self._balance
 
-# Функция для отображения главного меню
 def display_menu():
     print("Добро пожаловать. Выберите действие:")
     print("1) Посмотреть категории")
@@ -115,19 +106,16 @@ def display_menu():
     print("4) Посмотреть счет")
     print("5) Выйти")
 
-# Функция для отображения категорий товаров
 def display_categories(categories):
     print("Выберите категорию:")
     for i, category in enumerate(categories.keys(), start=1):
         print(f"{i}) {category}")
 
-# Функция для отображения товаров в выбранной категории
 def display_products(products):
     print("Выберите товар:")
     for i, product in enumerate(products, start=1):
         print(f"{i}) {product.get_details()}")
 
-# Главная функция программы
 def main():
     categories = {
         "Книги": [
